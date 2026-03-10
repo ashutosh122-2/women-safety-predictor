@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Safety Predictor - Home</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-shield-alt me-2"></i>Women Safety Predictor
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="result.html">
+                            <i class="fas fa-chart-line me-1"></i>Result
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container h-100 d-flex align-items-center justify-content-center">
+            <div class="row w-100 justify-content-center">
+                <div class="col-lg-6 col-md-8 col-sm-10">
+                    <!-- Glassmorphism Card -->
+                    <div class="glass-card fade-in">
+                        <div class="text-center mb-4">
+                            <h1 class="display-4 fw-bold text-white mb-3">
+                                <i class="fas fa-shield-alt me-3"></i>Women Safety Predictor
+                            </h1>
+                            <p class="lead text-white-50">Check safety score of your area</p>
+                            <p class="text-white-50 small"><i class="fas fa-info-circle me-1"></i>All UP locations accepted • Detailed data for 10 major cities</p>
+                        </div>
+                        
+                        <!-- Input Form -->
+                        <form class="safety-form" id="safetyForm">
+                            <div class="mb-4">
+                                <label for="location" class="form-label text-white">
+                                    <i class="fas fa-map-marker-alt me-2"></i>Location
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text glass-input">
+                                        <i class="fas fa-location-dot text-primary"></i>
+                                    </span>
+                                    <input type="text" class="form-control glass-input" id="location" 
+                                           placeholder="Enter UP location (e.g., Lucknow, Agra, Kanpur)" required autocomplete="off">
+                                    <small class="text-white-50 mt-1 d-block">All Uttar Pradesh locations accepted (detailed data for: Lucknow, Kanpur, Agra, Aligarh, Bareilly, Ghaziabad, Gorakhpur, Meerut, Prayagraj, Varanasi)</small>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="timeOfDay" class="form-label text-white">
+                                    <i class="fas fa-clock me-2"></i>Time of Day
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text glass-input">
+                                        <i class="fas fa-sun text-warning"></i>
+                                    </span>
+                                    <select class="form-select glass-input" id="timeOfDay" required>
+                                        <option value="">Select time of day</option>
+                                        <option value="morning">Morning (6 AM - 12 PM)</option>
+                                        <option value="afternoon">Afternoon (12 PM - 6 PM)</option>
+                                        <option value="evening">Evening (6 PM - 9 PM)</option>
+                                        <option value="night">Night (9 PM - 6 AM)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg glow-button">
+                                    <i class="fas fa-search me-2"></i>Check Safety Score
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h5 class="mt-3">Real-time Analysis</h5>
+                        <p class="text-muted">Get instant safety predictions based on current data and patterns.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h5 class="mt-3">Location-based</h5>
+                        <p class="text-muted">Accurate predictions tailored to your specific location and time.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h5 class="mt-3">Data-driven</h5>
+                        <p class="text-muted">Powered by advanced algorithms and comprehensive safety data.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        let autocomplete;
+        let placesService;
+        
+        // Initialize Google Places Autocomplete
+        async function initPlacesAutocomplete() {
+            try {
+                const cfgRes = await fetch('/api/config');
+                if (!cfgRes.ok) return;
+                const cfg = await cfgRes.ok ? await cfgRes.json() : {};
+                const apiKey = cfg.mapsApiKey;
+                
+                if (!apiKey) {
+                    console.log('Google Maps API key not configured');
+                    return;
+                }
+                
+                // Load Google Maps Places library
+                if (!window.google || !window.google.maps) {
+                    const script = document.createElement('script');
+                    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initAutocomplete`;
+                    script.async = true;
+                    script.defer = true;
+                    window.initAutocomplete = function() {
+                        setupAutocomplete();
+                    };
+                    document.head.appendChild(script);
+                } else {
+                    setupAutocomplete();
+                }
+            } catch (err) {
+                console.log('Could not load Google Places:', err);
+            }
+        }
+        
+        function setupAutocomplete() {
+            const locationInput = document.getElementById('location');
+            if (!window.google || !window.google.maps) return;
+            
+            autocomplete = new google.maps.places.Autocomplete(locationInput, {
+                types: ['(cities)'],
+                componentRestrictions: { 
+                    country: 'in',
+                    administrativeArea: 'Uttar Pradesh'  // Restrict to UP only
+                }
+            });
+            
+            autocomplete.addListener('place_changed', function() {
+                const place = autocomplete.getPlace();
+                if (place.formatted_address) {
+                    // Extract city name from formatted address
+                    const cityName = place.name || place.formatted_address.split(',')[0];
+                    locationInput.value = cityName;
+                }
+            });
+        }
+        
+        // Form submission handler
+        document.getElementById('safetyForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const location = document.getElementById('location').value.trim();
+            const timeOfDay = document.getElementById('timeOfDay').value;
+            const locationInput = document.getElementById('location');
+            const errorDiv = document.getElementById('locationError');
+            
+            // Remove any existing error message
+            if (errorDiv) {
+                errorDiv.remove();
+            }
+            
+            if (location && timeOfDay) {
+                // Validate location is in UP before proceeding
+                try {
+                    const validateRes = await fetch('/api/geocode?location=' + encodeURIComponent(location));
+                    const validateData = await validateRes.json();
+                    
+                    if (!validateRes.ok || validateData.error) {
+                        // Show error message
+                        const errorMsg = document.createElement('div');
+                        errorMsg.id = 'locationError';
+                        errorMsg.className = 'alert alert-danger mt-2';
+                        errorMsg.innerHTML = `
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Invalid Location:</strong> ${validateData.message || 'Location must be in Uttar Pradesh'}
+                            <br><small>Valid locations: ${validateData.valid_locations ? validateData.valid_locations.join(', ') : 'Lucknow, Kanpur, Agra, etc.'}</small>
+                        `;
+                        locationInput.parentElement.parentElement.appendChild(errorMsg);
+                        locationInput.classList.add('is-invalid');
+                        return;
+                    }
+                    
+                    // Location is valid, proceed
+                    locationInput.classList.remove('is-invalid');
+                    
+                    // Store data in localStorage for result page and dashboard
+                    localStorage.setItem('safetyLocation', location);
+                    localStorage.setItem('safetyTime', timeOfDay);
+                    
+                    // Save to search history
+                    const searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+                    searchHistory.unshift({
+                        location: location,
+                        timeOfDay: timeOfDay,
+                        timestamp: new Date().toISOString()
+                    });
+                    // Keep only last 50 searches
+                    if (searchHistory.length > 50) {
+                        searchHistory.pop();
+                    }
+                    localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+                    
+                    // Redirect to result page
+                    window.location.href = 'result.html';
+                } catch (err) {
+                    console.error('Validation error:', err);
+                    // Still allow submission if validation fails (network error)
+                    localStorage.setItem('safetyLocation', location);
+                    localStorage.setItem('safetyTime', timeOfDay);
+                    window.location.href = 'result.html';
+                }
+            }
+        });
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initPlacesAutocomplete();
+            
+            // Add smooth scroll effect
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe feature cards
+            document.querySelectorAll('.feature-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

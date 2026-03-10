@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Safety Predictor - Result</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-shield-alt me-2"></i>Women Safety Predictor
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="result.html">
+                            <i class="fas fa-chart-line me-1"></i>Result
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid result-page">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <!-- Prediction Result Card -->
+                <div class="result-card fade-in">
+                    <div class="text-center mb-4">
+                        <h1 class="display-5 fw-bold text-white mb-3">
+                            <i class="fas fa-chart-line me-3"></i>Prediction Result
+                        </h1>
+                        <div class="result-info">
+                            <p class="text-white-50 mb-1">
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                <span id="resultLocation">Loading...</span>
+                            </p>
+                            <p class="text-white-50">
+                                <i class="fas fa-clock me-2"></i>
+                                <span id="resultTime">Loading...</span>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Safety Status -->
+                    <div class="safety-status text-center mb-4">
+                        <div class="status-icon mb-3">
+                            <i class="fas fa-shield-alt" id="statusIcon"></i>
+                        </div>
+                        <h2 class="display-3 fw-bold" id="safetyStatus">Safe</h2>
+                        <p class="lead text-white-50" id="safetyMessage">Your area is considered safe for the selected time.</p>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="progress-container mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-white">Safety Score</span>
+                            <span class="text-white fw-bold" id="scorePercentage">85%</span>
+                        </div>
+                        <div class="progress progress-custom">
+                            <div class="progress-bar progress-bar-animated" id="progressBar" 
+                                 role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="text-center">
+                        <button class="btn btn-outline-light btn-lg me-3" onclick="shareResult()">
+                            <i class="fas fa-share-alt me-2"></i>Share Result
+                        </button>
+                        <a href="index.html" class="btn btn-primary btn-lg glow-button">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Home
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Map Section -->
+                <div class="map-section mt-5">
+                    <div class="map-card">
+                        <h4 class="text-white mb-3">
+                            <i class="fas fa-map me-2"></i>Location Map
+                        </h4>
+                        <div id="map" class="map-placeholder" style="height: 400px; position: relative; background: #1a1a2e; width: 100%;">
+                            <div class="map-overlay" id="resultMapOverlay" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; background: rgba(0,0,0,0.8); position: absolute; width: 100%; z-index: 1000; border-radius: 15px; top: 0; left: 0;">
+                                <i class="fas fa-map-marked-alt fa-3x text-primary mb-3"></i>
+                                <p class="text-white">Loading Map...</p>
+                                <small class="text-white-50">Initializing Google Maps</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Unsafe Areas List -->
+                <div class="unsafe-areas mt-5">
+                    <div class="areas-card">
+                        <h4 class="text-white mb-3">
+                            <i class="fas fa-exclamation-triangle me-2"></i>Top Unsafe Areas
+                        </h4>
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item glass-list-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Downtown District</h6>
+                                    <span class="badge bg-danger">High Risk</span>
+                                </div>
+                                <p class="mb-1 text-muted">Multiple incidents reported in the past month</p>
+                                <small class="text-muted">Last updated: 2 hours ago</small>
+                            </div>
+                            <div class="list-group-item glass-list-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Industrial Zone</h6>
+                                    <span class="badge bg-warning">Medium Risk</span>
+                                </div>
+                                <p class="mb-1 text-muted">Limited lighting and surveillance</p>
+                                <small class="text-muted">Last updated: 4 hours ago</small>
+                            </div>
+                            <div class="list-group-item glass-list-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">Park Area</h6>
+                                    <span class="badge bg-warning">Medium Risk</span>
+                                </div>
+                                <p class="mb-1 text-muted">Isolated areas with poor visibility</p>
+                                <small class="text-muted">Last updated: 6 hours ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Load result data from localStorage, then call backend for actual prediction
+        document.addEventListener('DOMContentLoaded', async function() {
+            const location = localStorage.getItem('safetyLocation') || 'Sample Location';
+            const time = localStorage.getItem('safetyTime') || 'evening';
+
+            // Display location and time
+            document.getElementById('resultLocation').textContent = location;
+            document.getElementById('resultTime').textContent = formatTime(time);
+
+            // Try calling backend. If it fails, show error
+            try {
+                const res = await fetch('/api/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ location, timeOfDay: time })
+                });
+                
+                if (!res.ok) {
+                    const errorData = await res.json();
+                    if (errorData.error === 'Invalid location') {
+                        // Show invalid location error
+                        document.querySelector('.result-card').innerHTML = `
+                            <div class="text-center mb-4">
+                                <h1 class="display-5 fw-bold text-danger mb-3">
+                                    <i class="fas fa-exclamation-triangle me-3"></i>Invalid Location
+                                </h1>
+                                <div class="alert alert-danger">
+                                    <h5><i class="fas fa-map-marker-alt me-2"></i>${location}</h5>
+                                    <p class="mb-2">${errorData.message || 'This location is not in Uttar Pradesh.'}</p>
+                                    <p class="mb-0"><strong>Valid UP Locations:</strong></p>
+                                    <p class="mb-0">${errorData.valid_locations ? errorData.valid_locations.join(', ') : 'Lucknow, Kanpur, Agra, Aligarh, Bareilly, Ghaziabad, Gorakhpur, Meerut, Prayagraj, Varanasi'}</p>
+                                </div>
+                                <a href="index.html" class="btn btn-primary btn-lg mt-3">
+                                    <i class="fas fa-arrow-left me-2"></i>Back to Home
+                                </a>
+                            </div>
+                        `;
+                        return;
+                    }
+                    throw new Error('Prediction request failed');
+                }
+                
+                const data = await res.json();
+                const score = Number(data.score) || 70;
+                const status = String(data.status || '').toLowerCase();
+                const isSafe = status === 'safe' || score >= 75;
+                updateSafetyDisplay(score, isSafe);
+                animateProgressBar(score);
+            } catch (err) {
+                // Show error message
+                document.querySelector('.result-card').innerHTML = `
+                    <div class="text-center mb-4">
+                        <h1 class="display-5 fw-bold text-danger mb-3">
+                            <i class="fas fa-exclamation-triangle me-3"></i>Error
+                        </h1>
+                        <div class="alert alert-danger">
+                            <p>Unable to get prediction. Please try again.</p>
+                            <p class="mb-0"><small>Error: ${err.message}</small></p>
+                        </div>
+                        <a href="index.html" class="btn btn-primary btn-lg mt-3">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Home
+                        </a>
+                    </div>
+                `;
+            }
+
+            // Load optional Google Maps API key
+            try {
+                console.log('Fetching config from /api/config...');
+                const cfgRes = await fetch('/api/config');
+                console.log('Config response status:', cfgRes.status);
+                
+                if (cfgRes.ok) {
+                    const cfg = await cfgRes.json();
+                    console.log('Config received:', { 
+                        hasApiKey: !!cfg.mapsApiKey, 
+                        apiKeyLength: cfg.mapsApiKey ? cfg.mapsApiKey.length : 0,
+                        modelAvailable: cfg.modelAvailable,
+                        csvAvailable: cfg.csvAvailable
+                    });
+                    
+                    if (cfg.mapsApiKey && cfg.mapsApiKey.trim() !== '') {
+                        console.log('Loading Google Maps with API key...');
+                        loadGoogleMaps(cfg.mapsApiKey.trim());
+                    } else {
+                        console.warn('Google Maps API key not configured or empty');
+                        const overlay = document.getElementById('resultMapOverlay');
+                        if (overlay) {
+                            overlay.innerHTML = 
+                                '<i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>' +
+                                '<h5 class="text-white">Google Maps API Key Required</h5>' +
+                                '<p class="text-white-50 mb-2">Set GOOGLE_MAPS_API_KEY environment variable</p>' +
+                                '<div class="text-white-50 small text-start" style="max-width: 400px; margin: 0 auto;">' +
+                                '<p class="mb-1"><strong>PowerShell:</strong></p>' +
+                                '<code class="d-block mb-2 p-2 bg-dark rounded">$env:GOOGLE_MAPS_API_KEY = "your-key-here"</code>' +
+                                '<p class="mb-1"><strong>Then restart backend:</strong></p>' +
+                                '<code class="d-block p-2 bg-dark rounded">python backend/app.py</code>' +
+                                '</div>';
+                        }
+                    }
+                } else {
+                    console.error('Failed to fetch config, status:', cfgRes.status);
+                    const overlay = document.getElementById('resultMapOverlay');
+                    if (overlay) {
+                        overlay.innerHTML = 
+                            '<i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>' +
+                            '<h5 class="text-white">Could not load configuration</h5>' +
+                            '<p class="text-white-50">Please check backend connection</p>' +
+                            '<p class="text-white-50 small">Status: ' + cfgRes.status + '</p>';
+                    }
+                }
+            } catch (err) {
+                console.error('Error loading config:', err);
+                const overlay = document.getElementById('resultMapOverlay');
+                if (overlay) {
+                    overlay.innerHTML = 
+                        '<i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>' +
+                        '<h5 class="text-white">Error Loading Map</h5>' +
+                        '<p class="text-white-50">Could not connect to backend</p>' +
+                        '<p class="text-white-50 small">Error: ' + err.message + '</p>';
+                }
+            }
+        });
+        
+        function formatTime(time) {
+            const timeMap = {
+                'morning': 'Morning (6 AM - 12 PM)',
+                'afternoon': 'Afternoon (12 PM - 6 PM)',
+                'evening': 'Evening (6 PM - 9 PM)',
+                'night': 'Night (9 PM - 6 AM)'
+            };
+            return timeMap[time] || time;
+        }
+        
+        function updateSafetyDisplay(score, isSafe) {
+            const statusElement = document.getElementById('safetyStatus');
+            const messageElement = document.getElementById('safetyMessage');
+            const iconElement = document.getElementById('statusIcon');
+            const progressBar = document.getElementById('progressBar');
+            
+            if (isSafe) {
+                statusElement.textContent = 'Safe';
+                statusElement.className = 'display-3 fw-bold text-success';
+                messageElement.textContent = 'Your area is considered safe for the selected time.';
+                iconElement.className = 'fas fa-shield-alt text-success';
+                progressBar.className = 'progress-bar progress-bar-animated bg-success';
+            } else {
+                statusElement.textContent = 'Unsafe';
+                statusElement.className = 'display-3 fw-bold text-danger';
+                messageElement.textContent = 'Please exercise caution in this area during the selected time.';
+                iconElement.className = 'fas fa-exclamation-triangle text-danger';
+                progressBar.className = 'progress-bar progress-bar-animated bg-danger';
+            }
+            
+            document.getElementById('scorePercentage').textContent = score + '%';
+        }
+        
+        function animateProgressBar(score) {
+            const progressBar = document.getElementById('progressBar');
+            let currentScore = 0;
+            const increment = score / 50; // Animate over 50 steps
+            
+            const animation = setInterval(() => {
+                currentScore += increment;
+                if (currentScore >= score) {
+                    currentScore = score;
+                    clearInterval(animation);
+                }
+                progressBar.style.width = currentScore + '%';
+                progressBar.setAttribute('aria-valuenow', Math.round(currentScore));
+            }, 30);
+        }
+        
+        function shareResult() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Women Safety Predictor Result',
+                    text: 'Check out my safety prediction result!',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Result link copied to clipboard!');
+                });
+            }
+        }
+
+        // Dynamically load Google Maps and initialize a basic map
+        function loadGoogleMaps(apiKey) {
+            console.log('loadGoogleMaps called with API key:', apiKey ? 'Present' : 'Missing');
+            
+            if (!apiKey || apiKey.trim() === '') {
+                const overlay = document.getElementById('resultMapOverlay');
+                if (overlay) {
+                    overlay.innerHTML = 
+                        '<i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>' +
+                        '<h5 class="text-white">Google Maps API Key Required</h5>' +
+                        '<p class="text-white-50 mb-2">Set GOOGLE_MAPS_API_KEY environment variable</p>' +
+                        '<p class="text-white-50 small mb-2">Steps to fix:</p>' +
+                        '<ol class="text-white-50 small text-start" style="display: inline-block;">' +
+                        '<li>Get API key from Google Cloud Console</li>' +
+                        '<li>Set: $env:GOOGLE_MAPS_API_KEY = "your-key"</li>' +
+                        '<li>Restart backend server</li>' +
+                        '</ol>';
+                }
+                return;
+            }
+            
+            if (document.getElementById('google-maps-script')) {
+                // Script already loading, wait for it
+                const checkInterval = setInterval(() => {
+                    if (window.google && window.google.maps) {
+                        clearInterval(checkInterval);
+                        initializeResultMap();
+                    }
+                }, 100);
+                return;
+            }
+            
+            const location = localStorage.getItem('safetyLocation') || 'Lucknow';
+            const score = parseInt(document.getElementById('scorePercentage')?.textContent?.replace('%', '') || '70');
+            const status = score >= 75 ? 'Safe' : (score >= 60 ? 'Medium Risk' : 'Unsafe');
+            const color = score >= 75 ? '#28a745' : (score >= 60 ? '#ffc107' : '#dc3545');
+            
+            window.initResultMap = function() {
+                initializeResultMap();
+            };
+            
+            function initializeResultMap() {
+                const el = document.getElementById('map');
+                if (!el) {
+                    console.error('Map element not found');
+                    return;
+                }
+                
+                try {
+                    if (!window.google || !window.google.maps) {
+                        console.error('Google Maps not loaded');
+                        const overlay = document.getElementById('resultMapOverlay');
+                        if (overlay) {
+                            overlay.innerHTML = 
+                                '<i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>' +
+                                '<h5 class="text-white">Google Maps Failed to Load</h5>' +
+                                '<p class="text-white-50">Please check your API key</p>';
+                        }
+                        return;
+                    }
+                    
+                    console.log('Initializing Google Map...');
+                    const defaultCenter = { lat: 26.8467, lng: 80.9462 }; // Lucknow default
+                    
+                    const map = new google.maps.Map(el, { 
+                        zoom: 12, 
+                        center: defaultCenter,
+                        mapTypeControl: true,
+                        streetViewControl: true,
+                        fullscreenControl: true,
+                        zoomControl: true,
+                        styles: [
+                            {
+                                featureType: "poi",
+                                elementType: "labels",
+                                stylers: [{ visibility: "off" }]
+                            }
+                        ]
+                    });
+                    
+                    console.log('Map created successfully');
+                    
+                    // Hide overlay once map is ready
+                    const hideOverlay = () => {
+                        const overlay = document.getElementById('resultMapOverlay');
+                        if (overlay) {
+                            overlay.style.display = 'none';
+                            console.log('Map overlay hidden');
+                        }
+                    };
+                    
+                    // Hide overlay when map tiles are loaded
+                    map.addListener('tilesloaded', function() {
+                        hideOverlay();
+                    });
+                    
+                    // Backup: hide overlay after delay
+                    setTimeout(hideOverlay, 2000);
+                    
+                    // Try backend geocoding first
+                    fetch(`/api/geocode?location=${encodeURIComponent(location)}`)
+                        .then(res => res.ok ? res.json() : null)
+                        .catch(() => null)
+                        .then(geoData => {
+                            let locationCoords;
+                            if (geoData && geoData.lat && geoData.lng) {
+                                locationCoords = { lat: geoData.lat, lng: geoData.lng };
+                                showLocationOnMap(map, locationCoords, location, score, status, color);
+                            } else {
+                                // Fallback to client-side geocoding
+                                const geocoder = new google.maps.Geocoder();
+                                geocoder.geocode({ address: location + ', Uttar Pradesh, India' }, (results, geocodeStatus) => {
+                                    if (geocodeStatus === 'OK' && results[0]) {
+                                        const loc = results[0].geometry.location;
+                                        locationCoords = { lat: loc.lat(), lng: loc.lng() };
+                                        showLocationOnMap(map, locationCoords, location, score, status, color);
+                                    } else {
+                                        // Use default center with marker
+                                        showLocationOnMap(map, defaultCenter, location, score, status, color);
+                                    }
+                                });
+                            }
+                        })
+                        .catch(() => {
+                            // Fallback to client-side geocoding
+                            const geocoder = new google.maps.Geocoder();
+                            geocoder.geocode({ address: location + ', Uttar Pradesh, India' }, (results, geocodeStatus) => {
+                                if (geocodeStatus === 'OK' && results[0]) {
+                                    const loc = results[0].geometry.location;
+                                    const locationCoords = { lat: loc.lat(), lng: loc.lng() };
+                                    showLocationOnMap(map, locationCoords, location, score, status, color);
+                                } else {
+                                    showLocationOnMap(map, defaultCenter, location, score, status, color);
+                                }
+                            });
+                        });
+                } catch (e) {
+                    console.error('Error initializing map:', e);
+                    const overlay = document.getElementById('resultMapOverlay');
+                    if (overlay) {
+                        overlay.innerHTML = 
+                            '<i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>' +
+                            '<p class="text-white">Error loading map</p>' +
+                            '<small class="text-white-50">' + e.message + '</small>';
+                    }
+                }
+            }
+            
+            function showLocationOnMap(map, locationCoords, locationName, score, status, markerColor) {
+                const marker = new google.maps.Marker({ 
+                    position: locationCoords, 
+                    map: map,
+                    title: `${locationName} - ${score}%`,
+                    animation: google.maps.Animation.DROP,
+                    icon: {
+                        path: google.maps.SymbolPath.CIRCLE,
+                        scale: 15,
+                        fillColor: markerColor,
+                        fillOpacity: 0.9,
+                        strokeColor: '#fff',
+                        strokeWeight: 3
+                    }
+                });
+                
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `
+                        <div style="padding: 12px; min-width: 220px;">
+                            <h6 style="margin: 0 0 8px 0; font-weight: bold; color: ${markerColor};">${locationName}</h6>
+                            <p style="margin: 0; font-size: 16px; font-weight: bold;">Safety Score: <span style="color: ${markerColor};">${score}%</span></p>
+                            <p style="margin: 5px 0 0 0; font-size: 13px; color: #666;">Status: <strong>${status}</strong></p>
+                            <p style="margin: 5px 0 0 0; font-size: 12px; color: #999;">Time: ${document.getElementById('resultTime')?.textContent || 'N/A'}</p>
+                        </div>
+                    `
+                });
+                
+                marker.addListener('click', () => {
+                    infoWindow.open(map, marker);
+                });
+                
+                // Open info window automatically
+                setTimeout(() => {
+                    infoWindow.open(map, marker);
+                }, 500);
+                
+                // Center and zoom map
+                map.setCenter(locationCoords);
+                map.setZoom(13);
+            }
+            
+            const s = document.createElement('script');
+            s.id = 'google-maps-script';
+            const apiKeyTrimmed = apiKey.trim();
+            console.log('Loading Google Maps with API key (length):', apiKeyTrimmed.length);
+            s.src = `https://maps.googleapis.com/maps/api/js?key=${apiKeyTrimmed}&libraries=places&callback=initResultMap`;
+            s.async = true;
+            s.defer = true;
+            s.onerror = function() {
+                console.error('Failed to load Google Maps script - check API key and enabled APIs');
+                const overlay = document.getElementById('resultMapOverlay');
+                if (overlay) {
+                    overlay.innerHTML = 
+                        '<i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>' +
+                        '<h5 class="text-white">Failed to Load Google Maps</h5>' +
+                        '<p class="text-white-50 mb-2">Check browser console (F12) for details</p>' +
+                        '<p class="text-white-50 small mb-2">Common issues:</p>' +
+                        '<ul class="text-white-50 small text-start" style="display: inline-block; text-align: left;">' +
+                        '<li>API key restrictions blocking localhost</li>' +
+                        '<li>Maps JavaScript API not enabled</li>' +
+                        '<li>Billing not enabled</li>' +
+                        '<li>Invalid API key</li>' +
+                        '</ul>';
+                }
+            };
+            s.onload = function() {
+                console.log('Google Maps script loaded successfully');
+            };
+            document.head.appendChild(s);
+            console.log('Google Maps script tag added to head with URL:', s.src.substring(0, 80) + '...');
+        }
+    </script>
+</body>
+</html>

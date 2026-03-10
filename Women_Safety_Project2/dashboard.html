@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Safety Predictor - Dashboard</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="custom.css">
+</head>
+<body class="dashboard-body">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="fas fa-shield-alt me-2"></i>Women Safety Predictor
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="result.html">
+                            <i class="fas fa-chart-line me-1"></i>Result
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dashboard.html">
+                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Layout -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h5 class="text-white">
+                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                </h5>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="menu-item active">
+                    <a href="#overview" class="menu-link">
+                        <i class="fas fa-home me-3"></i>Overview
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#predictions" class="menu-link">
+                        <i class="fas fa-chart-line me-3"></i>Predictions
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#alerts" class="menu-link">
+                        <i class="fas fa-bell me-3"></i>Alerts
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#settings" class="menu-link">
+                        <i class="fas fa-cog me-3"></i>Settings
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <h2 class="text-white mb-0">Safety Overview</h2>
+                <p class="text-white-50">Real-time safety monitoring and analytics</p>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="row mb-4">
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-primary">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-target="1247">0</h3>
+                            <p class="stat-label">Total Predictions</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-success">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-target="78">0</h3>
+                            <p class="stat-label">Safe Areas %</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-target="15">0</h3>
+                            <p class="stat-label">Medium Risk %</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-danger">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-target="7">0</h3>
+                            <p class="stat-label">High Risk %</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map and Alerts Row -->
+            <div class="row">
+                <!-- Map Section -->
+                <div class="col-lg-8 mb-4">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h5 class="text-white mb-0">
+                                <i class="fas fa-map me-2"></i>Safety Map
+                            </h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div id="dashboardMap" class="dashboard-map" style="height: 500px; position: relative; width: 100%;">
+                                <div class="map-overlay" id="mapOverlay" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; background: rgba(0,0,0,0.8); position: absolute; width: 100%; z-index: 1000; border-radius: 15px; top: 0; left: 0;">
+                                    <i class="fas fa-map-marked-alt fa-4x text-primary mb-3"></i>
+                                    <h5 class="text-white">Loading Map...</h5>
+                                    <p class="text-white-50">Initializing Google Maps</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Alerts -->
+                <div class="col-lg-4 mb-4">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h5 class="text-white mb-0">
+                                <i class="fas fa-bell me-2"></i>Recent Alerts
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="alerts-list" id="recentAlerts">
+                                <div class="text-center text-white-50 py-3">
+                                    <i class="fas fa-spinner fa-spin"></i> Loading recent searches...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Predictions Table -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h5 class="text-white mb-0">
+                                <i class="fas fa-history me-2"></i>Recent Predictions
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-dark table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Location</th>
+                                            <th>Time</th>
+                                            <th>Safety Score</th>
+                                            <th>Status</th>
+                                            <th>Timestamp</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="predictionsTableBody">
+                                        <tr>
+                                            <td colspan="5" class="text-center text-white-50 py-4">
+                                                <i class="fas fa-spinner fa-spin me-2"></i>Loading predictions...
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Analysis Section -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h5 class="text-white mb-0">
+                                <i class="fas fa-chart-bar me-2"></i>Location Analysis
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="analysisContent">
+                                <div class="text-center text-white-50 py-4">
+                                    <i class="fas fa-spinner fa-spin me-2"></i>Loading analysis...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        let map;
+        let markers = [];
+        let geocoder;
+        let heatmap;
+        let heatmapData = [];
+        
+        // Animate statistics numbers
+        function animateNumbers() {
+            const numbers = document.querySelectorAll('.stat-number');
+            
+            numbers.forEach(number => {
+                const target = parseInt(number.getAttribute('data-target'));
+                const increment = target / 50;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    number.textContent = Math.floor(current);
+                }, 30);
+            });
+        }
+        
+        // Initialize Google Maps
+        async function initGoogleMap() {
+            try {
+                console.log('Dashboard: Fetching config from /api/config...');
+                const cfgRes = await fetch('/api/config');
+                console.log('Dashboard: Config response status:', cfgRes.status);
+                
+                if (!cfgRes.ok) {
+                    console.error('Could not fetch config, status:', cfgRes.status);
+                    const overlay = document.getElementById('mapOverlay');
+                    if (overlay) {
+                        overlay.innerHTML = 
+                            '<i class="fas fa-exclamation-triangle fa-4x text-danger mb-3"></i>' +
+                            '<h5 class="text-white">Could not load configuration</h5>' +
+                            '<p class="text-white-50">Please check backend connection</p>';
+                    }
+                    return;
+                }
+                
+                const cfg = await cfgRes.json();
+                console.log('Dashboard: Config received:', { 
+                    hasApiKey: !!cfg.mapsApiKey, 
+                    apiKeyLength: cfg.mapsApiKey ? cfg.mapsApiKey.length : 0
+                });
+                
+                const apiKey = cfg.mapsApiKey;
+                
+                if (!apiKey || apiKey.trim() === '') {
+                    console.warn('Dashboard: Google Maps API key not configured');
+                    const overlay = document.getElementById('mapOverlay');
+                    if (overlay) {
+                        overlay.innerHTML = 
+                            '<i class="fas fa-exclamation-triangle fa-4x text-warning mb-3"></i>' +
+                            '<h5 class="text-white">Google Maps API Key Required</h5>' +
+                            '<p class="text-white-50 mb-2">Set GOOGLE_MAPS_API_KEY environment variable</p>' +
+                            '<div class="text-white-50 small text-start" style="max-width: 400px; margin: 0 auto;">' +
+                            '<p class="mb-1"><strong>PowerShell:</strong></p>' +
+                            '<code class="d-block mb-2 p-2 bg-dark rounded">$env:GOOGLE_MAPS_API_KEY = "your-key-here"</code>' +
+                            '<p class="mb-1"><strong>Then restart backend:</strong></p>' +
+                            '<code class="d-block p-2 bg-dark rounded">python backend/app.py</code>' +
+                            '</div>';
+                    }
+                    return;
+                }
+                
+                // Load Google Maps script with visualization library for heatmap
+                if (!window.google || !window.google.maps) {
+                    const script = document.createElement('script');
+                    script.id = 'google-maps-dashboard-script';
+                    const apiKeyTrimmed = apiKey.trim();
+                    console.log('Dashboard: Loading Google Maps with API key (length):', apiKeyTrimmed.length);
+                    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKeyTrimmed}&libraries=places,visualization&callback=initDashboardMap`;
+                    script.async = true;
+                    script.defer = true;
+                    script.onerror = function() {
+                        console.error('Failed to load Google Maps script');
+                        const overlay = document.getElementById('mapOverlay');
+                        if (overlay) {
+                            overlay.innerHTML = 
+                                '<i class="fas fa-exclamation-triangle fa-4x text-danger mb-3"></i>' +
+                                '<h5 class="text-white">Failed to Load Google Maps</h5>' +
+                                '<p class="text-white-50 mb-2">Possible issues:</p>' +
+                                '<ul class="text-white-50 small text-start" style="display: inline-block;">' +
+                                '<li>Invalid API key</li>' +
+                                '<li>API key restrictions</li>' +
+                                '<li>Billing not enabled</li>' +
+                                '<li>Required APIs not enabled</li>' +
+                                '</ul>';
+                        }
+                    };
+                    script.onload = function() {
+                        console.log('Dashboard: Google Maps script loaded successfully');
+                    };
+                    window.initDashboardMap = function() {
+                        setupMap();
+                    };
+                    document.head.appendChild(script);
+                } else {
+                    setupMap();
+                }
+            } catch (err) {
+                console.error('Error loading Google Maps:', err);
+            }
+        }
+        
+        function setupMap() {
+            const mapElement = document.getElementById('dashboardMap');
+            if (!mapElement) {
+                console.error('Dashboard: Map element not found');
+                return;
+            }
+            
+            if (!window.google || !window.google.maps) {
+                console.error('Dashboard: Google Maps not loaded');
+                const overlay = document.getElementById('mapOverlay');
+                if (overlay) {
+                    overlay.innerHTML = 
+                        '<i class="fas fa-exclamation-triangle fa-4x text-danger mb-3"></i>' +
+                        '<h5 class="text-white">Google Maps Failed to Load</h5>' +
+                        '<p class="text-white-50">Please refresh the page</p>';
+                }
+                return;
+            }
+            
+            console.log('Dashboard: Setting up map...');
+            // Default center (UP, India)
+            const defaultCenter = { lat: 26.8467, lng: 80.9462 }; // Lucknow
+            
+            try {
+                map = new google.maps.Map(mapElement, {
+                    zoom: 6,
+                    center: defaultCenter,
+                    mapTypeControl: true,
+                    streetViewControl: true,
+                    fullscreenControl: true,
+                    zoomControl: true,
+                    styles: [
+                        {
+                            featureType: "poi",
+                            elementType: "labels",
+                            stylers: [{ visibility: "off" }]
+                        }
+                    ]
+                });
+                
+                console.log('Dashboard: Map created successfully');
+                
+                geocoder = new google.maps.Geocoder();
+                
+                // Hide overlay once map is ready
+                const hideOverlay = () => {
+                    const overlay = document.getElementById('mapOverlay');
+                    if (overlay) {
+                        overlay.style.display = 'none';
+                        console.log('Dashboard: Map overlay hidden');
+                    }
+                };
+                
+                map.addListener('tilesloaded', function() {
+                    console.log('Dashboard: Map tiles loaded');
+                    hideOverlay();
+                });
+                
+                // Also hide overlay after a short delay (backup)
+                setTimeout(hideOverlay, 2000);
+                
+                // Load search history and add markers
+                loadSearchHistory();
+            } catch (error) {
+                console.error('Dashboard: Error creating map:', error);
+                const overlay = document.getElementById('mapOverlay');
+                if (overlay) {
+                    overlay.innerHTML = 
+                        '<i class="fas fa-exclamation-triangle fa-4x text-danger mb-3"></i>' +
+                        '<h5 class="text-white">Error Creating Map</h5>' +
+                        '<p class="text-white-50">' + error.message + '</p>';
+                }
+            }
+        }
+        
+        // Load and display search history
+        async function loadSearchHistory() {
+            const searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+            
+            if (searchHistory.length === 0) {
+                document.getElementById('predictionsTableBody').innerHTML = 
+                    '<tr><td colspan="5" class="text-center text-white-50 py-4">No search history yet. Start searching locations!</td></tr>';
+                document.getElementById('recentAlerts').innerHTML = 
+                    '<div class="text-center text-white-50 py-3">No recent searches</div>';
+                return;
+            }
+            
+            // Update predictions table
+            updatePredictionsTable(searchHistory);
+            
+            // Update recent alerts
+            updateRecentAlerts(searchHistory);
+            
+            // Update statistics
+            updateStatistics(searchHistory);
+            
+            // Add markers to map
+            if (map && geocoder) {
+                addMarkersToMap(searchHistory);
+            }
+        }
+        
+        async function updatePredictionsTable(history) {
+            const tbody = document.getElementById('predictionsTableBody');
+            tbody.innerHTML = '';
+            
+            // Get predictions for recent searches
+            const recentSearches = history.slice(0, 10);
+            
+            for (const search of recentSearches) {
+                try {
+                    const res = await fetch('/api/predict', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            location: search.location, 
+                            timeOfDay: search.timeOfDay 
+                        })
+                    });
+                    
+                    if (res.ok) {
+                        const data = await res.json();
+                        const score = data.score || 70;
+                        const status = data.status || 'Medium';
+                        const statusClass = score >= 75 ? 'success' : (score >= 60 ? 'warning' : 'danger');
+                        const statusText = score >= 75 ? 'Safe' : (score >= 60 ? 'Medium Risk' : 'Unsafe');
+                        const timeAgo = getTimeAgo(new Date(search.timestamp));
+                        
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td><i class="fas fa-map-marker-alt text-primary me-2"></i>${search.location}</td>
+                            <td>${formatTimeOfDay(search.timeOfDay)}</td>
+                            <td>${score}%</td>
+                            <td><span class="badge bg-${statusClass}">${statusText}</span></td>
+                            <td>${timeAgo}</td>
+                        `;
+                        tbody.appendChild(row);
+                    } else {
+                        // Invalid location - show error row
+                        const errorData = await res.json().catch(() => ({}));
+                        if (errorData.error === 'Invalid location') {
+                            const row = document.createElement('tr');
+                            row.className = 'table-warning';
+                            row.innerHTML = `
+                                <td><i class="fas fa-exclamation-triangle text-warning me-2"></i>${search.location}</td>
+                                <td>${formatTimeOfDay(search.timeOfDay)}</td>
+                                <td>-</td>
+                                <td><span class="badge bg-warning">Invalid</span></td>
+                                <td>${getTimeAgo(new Date(search.timestamp))}</td>
+                            `;
+                            tbody.appendChild(row);
+                        }
+                    }
+                } catch (err) {
+                    console.error('Error fetching prediction:', err);
+                }
+            }
+        }
+        
+        function updateRecentAlerts(history) {
+            const alertsDiv = document.getElementById('recentAlerts');
+            alertsDiv.innerHTML = '';
+            
+            const recentSearches = history.slice(0, 5);
+            
+            recentSearches.forEach(async (search, index) => {
+                try {
+                    const res = await fetch('/api/predict', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            location: search.location, 
+                            timeOfDay: search.timeOfDay 
+                        })
+                    });
+                    
+                    if (res.ok) {
+                        const data = await res.json();
+                        const score = data.score || 70;
+                        const alertClass = score >= 75 ? 'success' : (score >= 60 ? 'warning' : 'danger');
+                        const alertIcon = score >= 75 ? 'check-circle' : (score >= 60 ? 'exclamation-triangle' : 'exclamation');
+                        const alertTitle = score >= 75 ? 'Safe Area' : (score >= 60 ? 'Medium Risk' : 'High Risk Alert');
+                        const timeAgo = getTimeAgo(new Date(search.timestamp));
+                        
+                        const alertItem = document.createElement('div');
+                        alertItem.className = 'alert-item';
+                        alertItem.innerHTML = `
+                            <div class="alert-icon bg-${alertClass}">
+                                <i class="fas fa-${alertIcon}"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h6 class="alert-title">${alertTitle}</h6>
+                                <p class="alert-text">${search.location} - ${formatTimeOfDay(search.timeOfDay)}</p>
+                                <small class="alert-time">${timeAgo}</small>
+                            </div>
+                        `;
+                        alertsDiv.appendChild(alertItem);
+                    } else {
+                        // Invalid location - show warning
+                        const errorData = await res.json().catch(() => ({}));
+                        if (errorData.error === 'Invalid location') {
+                            const alertItem = document.createElement('div');
+                            alertItem.className = 'alert-item';
+                            alertItem.innerHTML = `
+                                <div class="alert-icon bg-warning">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="alert-content">
+                                    <h6 class="alert-title">Invalid Location</h6>
+                                    <p class="alert-text">${search.location} - Not in UP</p>
+                                    <small class="alert-time">${getTimeAgo(new Date(search.timestamp))}</small>
+                                </div>
+                            `;
+                            alertsDiv.appendChild(alertItem);
+                        }
+                    }
+                } catch (err) {
+                    console.error('Error fetching alert:', err);
+                }
+            });
+        }
+        
+        function updateStatistics(history) {
+            // Update total predictions count
+            const totalPredictions = document.querySelector('.stat-number[data-target="1247"]');
+            if (totalPredictions) {
+                totalPredictions.setAttribute('data-target', history.length);
+                totalPredictions.textContent = history.length;
+            }
+            
+            // Calculate statistics
+            if (history.length > 0) {
+                calculateAndDisplayAnalysis(history);
+            }
+        }
+        
+        async function calculateAndDisplayAnalysis(history) {
+            const analysisDiv = document.getElementById('analysisContent');
+            
+            // Get unique locations and their scores
+            const locationScores = {};
+            const timeOfDayCounts = { morning: 0, afternoon: 0, evening: 0, night: 0 };
+            
+            for (const search of history) {
+                // Count time of day
+                if (timeOfDayCounts.hasOwnProperty(search.timeOfDay)) {
+                    timeOfDayCounts[search.timeOfDay]++;
+                }
+                
+                // Get score for location (skip invalid locations)
+                if (!locationScores[search.location]) {
+                    try {
+                        const res = await fetch('/api/predict', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ 
+                                location: search.location, 
+                                timeOfDay: search.timeOfDay 
+                            })
+                        });
+                        if (res.ok) {
+                            const data = await res.json();
+                            locationScores[search.location] = {
+                                scores: [data.score],
+                                count: 1,
+                                avgScore: data.score
+                            };
+                        }
+                        // If res is not ok, location is invalid - skip it
+                    } catch (err) {
+                        console.error('Error in analysis:', err);
+                    }
+                } else {
+                    try {
+                        const res = await fetch('/api/predict', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ 
+                                location: search.location, 
+                                timeOfDay: search.timeOfDay 
+                            })
+                        });
+                        if (res.ok) {
+                            const data = await res.json();
+                            locationScores[search.location].scores.push(data.score);
+                            locationScores[search.location].count++;
+                            const scores = locationScores[search.location].scores;
+                            locationScores[search.location].avgScore = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+                        }
+                        // If res is not ok, location is invalid - skip it
+                    } catch (err) {
+                        console.error('Error in analysis:', err);
+                    }
+                }
+            }
+            
+            // Sort locations by average score
+            const sortedLocations = Object.entries(locationScores)
+                .map(([location, data]) => ({ location, ...data }))
+                .sort((a, b) => a.avgScore - b.avgScore);
+            
+            // Find safest and riskiest locations
+            const safest = sortedLocations[sortedLocations.length - 1];
+            const riskiest = sortedLocations[0];
+            
+            // Calculate overall statistics
+            const allScores = Object.values(locationScores).flatMap(loc => loc.scores);
+            const avgScore = allScores.length > 0 ? Math.round(allScores.reduce((a, b) => a + b, 0) / allScores.length) : 0;
+            const safeCount = allScores.filter(s => s >= 75).length;
+            const mediumCount = allScores.filter(s => s >= 60 && s < 75).length;
+            const unsafeCount = allScores.filter(s => s < 60).length;
+            
+            // Update statistics cards
+            const safePercent = document.querySelector('.stat-number[data-target="78"]');
+            const mediumPercent = document.querySelector('.stat-number[data-target="15"]');
+            const highPercent = document.querySelector('.stat-number[data-target="7"]');
+            
+            if (allScores.length > 0) {
+                if (safePercent) {
+                    safePercent.setAttribute('data-target', Math.round((safeCount / allScores.length) * 100));
+                    safePercent.textContent = Math.round((safeCount / allScores.length) * 100);
+                }
+                if (mediumPercent) {
+                    mediumPercent.setAttribute('data-target', Math.round((mediumCount / allScores.length) * 100));
+                    mediumPercent.textContent = Math.round((mediumCount / allScores.length) * 100);
+                }
+                if (highPercent) {
+                    highPercent.setAttribute('data-target', Math.round((unsafeCount / allScores.length) * 100));
+                    highPercent.textContent = Math.round((unsafeCount / allScores.length) * 100);
+                }
+            }
+            
+            // Display analysis
+            analysisDiv.innerHTML = `
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <h6 class="text-white mb-3"><i class="fas fa-trophy me-2 text-success"></i>Safest Location</h6>
+                        ${safest ? `
+                            <div class="analysis-card bg-success bg-opacity-10 p-3 rounded">
+                                <h5 class="text-white mb-1">${safest.location}</h5>
+                                <p class="text-white-50 mb-0">Average Safety Score: <strong class="text-success">${safest.avgScore}%</strong></p>
+                                <small class="text-white-50">Searched ${safest.count} time${safest.count > 1 ? 's' : ''}</small>
+                            </div>
+                        ` : '<p class="text-white-50">No data available</p>'}
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <h6 class="text-white mb-3"><i class="fas fa-exclamation-triangle me-2 text-danger"></i>Riskiest Location</h6>
+                        ${riskiest ? `
+                            <div class="analysis-card bg-danger bg-opacity-10 p-3 rounded">
+                                <h5 class="text-white mb-1">${riskiest.location}</h5>
+                                <p class="text-white-50 mb-0">Average Safety Score: <strong class="text-danger">${riskiest.avgScore}%</strong></p>
+                                <small class="text-white-50">Searched ${riskiest.count} time${riskiest.count > 1 ? 's' : ''}</small>
+                            </div>
+                        ` : '<p class="text-white-50">No data available</p>'}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h6 class="text-white mb-3"><i class="fas fa-chart-pie me-2"></i>Search Distribution by Time</h6>
+                        <div class="row">
+                            <div class="col-3 text-center">
+                                <div class="analysis-stat">
+                                    <h4 class="text-primary">${timeOfDayCounts.morning}</h4>
+                                    <small class="text-white-50">Morning</small>
+                                </div>
+                            </div>
+                            <div class="col-3 text-center">
+                                <div class="analysis-stat">
+                                    <h4 class="text-info">${timeOfDayCounts.afternoon}</h4>
+                                    <small class="text-white-50">Afternoon</small>
+                                </div>
+                            </div>
+                            <div class="col-3 text-center">
+                                <div class="analysis-stat">
+                                    <h4 class="text-warning">${timeOfDayCounts.evening}</h4>
+                                    <small class="text-white-50">Evening</small>
+                                </div>
+                            </div>
+                            <div class="col-3 text-center">
+                                <div class="analysis-stat">
+                                    <h4 class="text-danger">${timeOfDayCounts.night}</h4>
+                                    <small class="text-white-50">Night</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                ${sortedLocations.length > 2 ? `
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h6 class="text-white mb-3"><i class="fas fa-list me-2"></i>All Locations (sorted by safety)</h6>
+                            <div class="table-responsive">
+                                <table class="table table-dark table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Location</th>
+                                            <th>Avg Score</th>
+                                            <th>Searches</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${sortedLocations.slice().reverse().slice(0, 10).map(loc => {
+                                            const statusClass = loc.avgScore >= 75 ? 'success' : (loc.avgScore >= 60 ? 'warning' : 'danger');
+                                            const statusText = loc.avgScore >= 75 ? 'Safe' : (loc.avgScore >= 60 ? 'Medium' : 'Unsafe');
+                                            return `
+                                                <tr>
+                                                    <td><i class="fas fa-map-marker-alt text-primary me-2"></i>${loc.location}</td>
+                                                    <td>${loc.avgScore}%</td>
+                                                    <td>${loc.count}</td>
+                                                    <td><span class="badge bg-${statusClass}">${statusText}</span></td>
+                                                </tr>
+                                            `;
+                                        }).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                ` : ''}
+            `;
+        }
+        
+        async function addMarkersToMap(history) {
+            // Clear existing markers and heatmap
+            markers.forEach(marker => marker.setMap(null));
+            markers = [];
+            heatmapData = [];
+            
+            if (heatmap) {
+                heatmap.setMap(null);
+                heatmap = null;
+            }
+            
+            const uniqueLocations = {};
+            history.forEach(search => {
+                if (!uniqueLocations[search.location]) {
+                    uniqueLocations[search.location] = search;
+                }
+            });
+            
+            // Geocode and add markers for unique locations (UP only)
+            const locationPromises = [];
+            
+            for (const locationName in uniqueLocations) {
+                const search = uniqueLocations[locationName];
+                
+                // Use backend geocoding which validates UP location
+                const geocodePromise = fetch(`/api/geocode?location=${encodeURIComponent(locationName)}`)
+                    .then(res => {
+                        if (!res.ok) {
+                            // Location not in UP, skip it
+                            return null;
+                        }
+                        return res.json();
+                    })
+                    .catch(() => null)
+                    .then(geoData => {
+                        if (geoData && geoData.lat && geoData.lng && geoData.is_valid) {
+                            return {
+                                lat: geoData.lat,
+                                lng: geoData.lng,
+                                location: locationName,
+                                search: search
+                            };
+                        }
+                        // Invalid location, skip
+                        return null;
+                    });
+                
+                locationPromises.push(geocodePromise);
+            }
+            
+            // Wait for all geocoding to complete
+            const locations = await Promise.all(locationPromises);
+            const validLocations = locations.filter(loc => loc !== null);
+            
+            // Fetch scores and create markers/heatmap data
+            for (const locData of validLocations) {
+                try {
+                    const res = await fetch('/api/predict', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            location: locData.location, 
+                            timeOfDay: locData.search.timeOfDay 
+                        })
+                    });
+                    
+                    if (res.ok) {
+                        const data = await res.json();
+                        const score = data.score || 70;
+                        const color = score >= 75 ? '#28a745' : (score >= 60 ? '#ffc107' : '#dc3545');
+                        
+                        // Create marker
+                        const marker = new google.maps.Marker({
+                            position: { lat: locData.lat, lng: locData.lng },
+                            map: map,
+                            title: `${locData.location} - ${score}%`,
+                            icon: {
+                                path: google.maps.SymbolPath.CIRCLE,
+                                scale: 12,
+                                fillColor: color,
+                                fillOpacity: 0.9,
+                                strokeColor: '#fff',
+                                strokeWeight: 2
+                            }
+                        });
+                        
+                        const infoWindow = new google.maps.InfoWindow({
+                            content: `
+                                <div style="padding: 10px; min-width: 200px;">
+                                    <h6 style="margin: 0 0 5px 0; font-weight: bold;">${locData.location}</h6>
+                                    <p style="margin: 0; font-size: 14px;">Safety Score: <strong style="color: ${color};">${score}%</strong></p>
+                                    <p style="margin: 5px 0 0 0; font-size: 12px; color: #666;">Time: ${formatTimeOfDay(locData.search.timeOfDay)}</p>
+                                    <p style="margin: 5px 0 0 0; font-size: 11px; color: #999;">Status: ${data.status}</p>
+                                </div>
+                            `
+                        });
+                        
+                        marker.addListener('click', () => {
+                            infoWindow.open(map, marker);
+                        });
+                        
+                        markers.push(marker);
+                        
+                        // Add to heatmap data (weight based on risk: lower score = higher weight for heatmap)
+                        // Heatmap shows risk areas, so invert the score
+                        const riskWeight = (100 - score) / 100;
+                        if (window.google && window.google.maps && window.google.maps.LatLng) {
+                            heatmapData.push({
+                                location: new google.maps.LatLng(locData.lat, locData.lng),
+                                weight: Math.max(0.5, riskWeight * 8) // Scale for visibility, minimum weight
+                            });
+                        }
+                    }
+                } catch (err) {
+                    console.error('Error fetching prediction:', err);
+                }
+            }
+            
+            // Create heatmap layer
+            if (heatmapData.length > 0 && map) {
+                console.log(`Creating heatmap with ${heatmapData.length} data points`);
+                
+                // Check if visualization library is available
+                if (window.google && window.google.maps && window.google.maps.visualization) {
+                    try {
+                        heatmap = new google.maps.visualization.HeatmapLayer({
+                            data: heatmapData,
+                            map: map,
+                            radius: 60,
+                            opacity: 0.7,
+                            maxIntensity: 10,
+                            dissipating: true,
+                            gradient: [
+                                'rgba(0, 255, 255, 0)',
+                                'rgba(0, 255, 255, 1)',
+                                'rgba(0, 191, 255, 1)',
+                                'rgba(0, 127, 255, 1)',
+                                'rgba(0, 63, 255, 1)',
+                                'rgba(0, 0, 255, 1)',
+                                'rgba(0, 0, 223, 1)',
+                                'rgba(0, 0, 191, 1)',
+                                'rgba(0, 0, 159, 1)',
+                                'rgba(0, 0, 127, 1)',
+                                'rgba(63, 0, 91, 1)',
+                                'rgba(127, 0, 63, 1)',
+                                'rgba(191, 0, 31, 1)',
+                                'rgba(255, 0, 0, 1)'
+                            ]
+                        });
+                        
+                        console.log('Heatmap created successfully');
+                        
+                        // Add toggle button for heatmap
+                        addHeatmapToggle();
+                    } catch (error) {
+                        console.error('Error creating heatmap:', error);
+                    }
+                } else {
+                    console.warn('Google Maps Visualization library not loaded. Heatmap will not be available.');
+                }
+            } else {
+                console.log('No heatmap data or map not available');
+            }
+            
+            // Fit bounds to show all markers
+            if (validLocations.length > 0) {
+                const bounds = new google.maps.LatLngBounds();
+                validLocations.forEach(loc => {
+                    bounds.extend({ lat: loc.lat, lng: loc.lng });
+                });
+                map.fitBounds(bounds);
+                
+                // Don't zoom in too much if only one location
+                if (validLocations.length === 1) {
+                    map.setZoom(12);
+                }
+            }
+        }
+        
+        function addHeatmapToggle() {
+            // Remove existing toggle if any
+            const existingToggle = document.getElementById('heatmapToggle');
+            if (existingToggle) {
+                existingToggle.remove();
+            }
+            
+            // Create toggle button
+            const toggleDiv = document.createElement('div');
+            toggleDiv.id = 'heatmapToggle';
+            toggleDiv.style.cssText = 'position: absolute; top: 10px; right: 10px; z-index: 1000; background: rgba(0,0,0,0.7); padding: 10px; border-radius: 5px;';
+            toggleDiv.innerHTML = `
+                <label style="color: white; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" id="heatmapCheckbox" checked style="cursor: pointer;">
+                    <span>Show Heatmap</span>
+                </label>
+            `;
+            
+            const mapContainer = document.getElementById('dashboardMap');
+            mapContainer.appendChild(toggleDiv);
+            
+            const checkbox = document.getElementById('heatmapCheckbox');
+            checkbox.addEventListener('change', function() {
+                if (heatmap) {
+                    heatmap.setMap(this.checked ? map : null);
+                }
+            });
+        }
+        
+        function formatTimeOfDay(time) {
+            const timeMap = {
+                'morning': 'Morning',
+                'afternoon': 'Afternoon',
+                'evening': 'Evening',
+                'night': 'Night'
+            };
+            return timeMap[time] || time;
+        }
+        
+        function getTimeAgo(date) {
+            const now = new Date();
+            const diff = now - date;
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(diff / 3600000);
+            const days = Math.floor(diff / 86400000);
+            
+            if (minutes < 1) return 'Just now';
+            if (minutes < 60) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+            if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+            return `${days} day${days > 1 ? 's' : ''} ago`;
+        }
+        
+        // Sidebar menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate numbers on load
+            setTimeout(animateNumbers, 500);
+            
+            // Initialize map
+            initGoogleMap();
+            
+            // Load search history
+            loadSearchHistory();
+            
+            // Sidebar menu click handlers
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    menuItems.forEach(mi => mi.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.stat-card, .dashboard-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Refresh data every 30 seconds
+            setInterval(loadSearchHistory, 30000);
+        });
+    </script>
+</body>
+</html>
